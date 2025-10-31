@@ -22,7 +22,7 @@ The application will be available at `http://localhost:5173`
 
 ## 🛠️ Tech Stack
 
-- **React 18** - UI library
+- **React 19** - UI library
 - **TypeScript** - Type safety and better developer experience
 - **Vite** - Fast build tool and development server
 - **Zustand** - Lightweight state management with persistence
