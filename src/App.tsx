@@ -57,7 +57,7 @@ function App() {
           {/* <h1 className="text-2xl font-bold text-indigo-600">ShopHub</h1> */}
           <button
             onClick={() => setCartOpen(!cartOpen)}
-            className="relative bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-2 ml-auto"
+            className="relative bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 ml-auto"
           >
             <span className="font-medium">Cart</span>
             {cartItemCount > 0 && (
@@ -82,7 +82,7 @@ function App() {
       <div className='px-5'>
         {loading && (
           <div className="flex items-center justify-center py-20">
-            <Loader2 className="animate-spin text-indigo-600" size={48} />
+            <Loader2 className="animate-spin text-blue-600" size={48} />
           </div>
         )}
         {error && (

@@ -25,11 +25,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         />
       </div>
       <div className="p-4 flex-1 flex flex-col">
-        <span className="text-xs font-medium text-indigo-600 uppercase tracking-wide">
+        <span className="text-xs font-medium text-blue-600 uppercase tracking-wide">
           {product.category}
         </span>
         <h3 
-          className="mt-2 text-lg font-semibold text-gray-900 line-clamp-2 cursor-pointer hover:text-indigo-600" 
+          className="mt-2 text-lg font-semibold text-gray-900 line-clamp-2 cursor-pointer hover:text-blue-600" 
           onClick={onSelect}
         >
           {product.title}
@@ -45,7 +45,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </span>
           <button
           onClick={onAddToCart}
-            className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-2"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
           >
             <Plus size={16} />
             Add To Cart

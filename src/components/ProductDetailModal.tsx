@@ -37,7 +37,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               />
             </div>
             <div>
-              <span className="text-sm font-medium text-indigo-600 uppercase tracking-wide">
+              <span className="text-sm font-medium text-blue-600 uppercase tracking-wide">
                 {product.category}
               </span>
               <h1 className="mt-2 text-3xl font-bold text-gray-900">
@@ -65,7 +65,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     onAddToCart();
                     onClose();
                   }}
-                  className="flex-1 bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2 font-medium"
+                  className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 font-medium"
                 >
                   <ShoppingCart size={20} />
                   Add to Cart
