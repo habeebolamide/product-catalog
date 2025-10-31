@@ -5,16 +5,16 @@ import React from 'react';
 // import { Search, Filter } from 'react-feather'; 
 
 interface SearchBarProps {
-  searchTerm: string;
-  setSearchTerm: (term: string) => void;
+  searchQuery: string;
+  setSearchQuery: (term: string) => void;
   selectedCategory: string;
   setSelectedCategory: (category: string) => void;
   categories: string[];
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
-  searchTerm,
-  setSearchTerm,
+  searchQuery,
+  setSearchQuery,
   selectedCategory,
   setSelectedCategory,
   categories,
@@ -29,23 +29,23 @@ const SearchBar: React.FC<SearchBarProps> = ({
             <input
               type="text"
               placeholder="Search products..."
-              value={searchTerm}
-              onChange={e => setSearchTerm(e.target.value)}
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-black"
             />
           </div>
 
           {/* Filter Select */}
           <div className="flex items-center gap-2">
-            <Filter size={20} className="text-gray-400" />
+            <Filter size={20} className="text-black" />
             <select
               value={selectedCategory}
               onChange={e => setSelectedCategory(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
+              className="px-4 py-2 border border-gray-300 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
             >
               {categories.map(cat => (
                 <option key={cat} value={cat}>
-                  {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                  {cat.charAt(0).toUpperCase() + cat.slice(1)} 
                 </option>
               ))}
             </select>

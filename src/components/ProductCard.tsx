@@ -4,13 +4,13 @@ import type { Product } from "../types";
 interface ProductCardProps {
   product: Product;
   onSelect: () => void;
-//   onAddToCart: () => void;
+  onAddToCart: () => void;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   product,
   onSelect,
-//   onAddToCart
+  onAddToCart
 }) => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
@@ -44,6 +44,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             ${product.price.toFixed(2)}
           </span>
           <button
+          onClick={onAddToCart}
             className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-2"
           >
             <Plus size={16} />

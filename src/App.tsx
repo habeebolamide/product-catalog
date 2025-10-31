@@ -1,25 +1,36 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import SearchBar from './components/SearchBar';
 import { useStore } from './state/useStore';
 import { useFilteredProducts } from './hooks/useFilteredProducts';
 import { ProductCard } from './components/ProductCard';
+import type { Product } from './types';
+import { CartSidebar } from './components/CartSidebar';
 
 function App() {
-  const [cartOpen, setCartOpen] = useState(false);
-  const cartItemCount = 3;
-  const categories = ['electronics', 'fashion', 'home', 'sports'];
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('electronics');
   const {
     fetchProducts,
     products,
+    cart,
     searchQuery,
     setSearchQuery,
     setSelectedProduct,
-    // addToCart,
     loading,
-    error
+    error,
+    addToCart,
+    removeFromCart,
+    updateQuantity
   } = useStore();
+  const [cartOpen, setCartOpen] = useState(false);
+  const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  const categories = useMemo(() => {
+    const cats = Array.from(new Set(products.map(p => p.category)));
+    return ['all', ...cats];
+  }, [products]);
+  
+
+  const [selectedCategory, setSelectedCategory] = useState('all');
+
 
   const filteredProducts = useFilteredProducts(
     products,
@@ -55,15 +66,14 @@ function App() {
       </header>
 
       <SearchBar
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
         categories={categories}
       />
 
       {/* Main Content  */}
-
 
       <div className='px-5'>
         {!loading && !error && filteredProducts.length > 0 && (
@@ -77,7 +87,7 @@ function App() {
                   key={product.id}
                   product={product}
                   onSelect={() => setSelectedProduct(product)}
-                  // onAddToCart={() => addToCart(product)}
+                onAddToCart={() => addToCart(product)}
                 />
               ))}
             </div>
@@ -88,20 +98,13 @@ function App() {
 
 
       {/* Cart Modal */}
-      {cartOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
-            <h2 className="text-xl font-semibold">Your Cart</h2>
-            <p>No items in cart yet.</p>
-            <button
-              onClick={() => setCartOpen(false)}
-              className="mt-4 bg-red-500 text-white py-2 px-4 rounded-full"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
+      <CartSidebar
+        cart={cart}
+        isOpen={cartOpen}
+        onClose={() => setCartOpen(false)}
+        onUpdateQuantity={updateQuantity}
+        onRemove={removeFromCart}
+      />
     </div>
   );
 }
