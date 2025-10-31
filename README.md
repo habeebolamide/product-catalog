@@ -47,16 +47,15 @@ The application will be available at `http://localhost:5173`
 src/
 ├── components/          # Reusable UI components
 │   ├── CartSidebar.tsx
-│   ├── FilterBar.tsx
-│   ├── Header.tsx
+│   ├── SearchBar.tsx
 │   ├── ProductCard.tsx
 │   └── ProductDetailModal.tsx
 ├── hooks/              # Custom React hooks
 │   └── useFilteredProducts.ts
-├── store/              # Zustand state management
+├── state/              # Zustand state management
 │   └── useStore.ts
 ├── types/              # TypeScript type definitions
-│   └── index.ts
+│   └── index.d.ts
 ├── App.tsx             # Main application component
 └── main.tsx            # Application entry point
 ```
@@ -69,28 +68,12 @@ src/
 - **TypeScript** - Strict typing throughout for fewer runtime errors
 - **Modular File Structure** - Clear separation of concerns for maintainability
 
-## 🔧 Configuration
-
-The project uses sensible defaults but can be customized:
-
-- **Tailwind** - Edit `tailwind.config.js` for theme customization
-- **Vite** - Modify `vite.config.ts` for build configuration
-- **TypeScript** - Adjust `tsconfig.json` for stricter or looser type checking
 
 ## 📝 Notes
 
 - Cart data persists in localStorage under the key `cart-storage`
 - The application uses Fake Store API which returns 20 products across 4 categories
 - All monetary values are formatted to 2 decimal places
-- Images are loaded lazily for better performance
-
-## 🚧 Future Enhancements
-
-- Add unit and integration tests
-- Implement pagination for better performance with larger datasets
-- Add product comparison feature
-- Integrate real payment processing
-- Add user authentication and order history
 
 ## 📄 License
 
