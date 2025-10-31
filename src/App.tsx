@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchBar from './components/SearchBar';
 import { useStore } from './state/useStore';
 import { useFilteredProducts } from './hooks/useFilteredProducts';
 import { ProductCard } from './components/ProductCard';
-import type { Product } from './types';
 import { CartSidebar } from './components/CartSidebar';
+import { AlertCircle, Loader2 } from 'lucide-react';
 
 function App() {
   const {
@@ -23,11 +23,13 @@ function App() {
   const [cartOpen, setCartOpen] = useState(false);
   const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-  const categories = useMemo(() => {
-    const cats = Array.from(new Set(products.map(p => p.category)));
-    return ['all', ...cats];
-  }, [products]);
-  
+  const categories = ['all'];
+  products.forEach(product => {
+    if (!categories.includes(product.category)) {
+      categories.push(product.category);
+    }
+  });
+
 
   const [selectedCategory, setSelectedCategory] = useState('all');
 
@@ -76,6 +78,25 @@ function App() {
       {/* Main Content  */}
 
       <div className='px-5'>
+        {loading && (
+          <div className="flex items-center justify-center py-20">
+            <Loader2 className="animate-spin text-indigo-600" size={48} />
+          </div>
+        )}
+        {error && (
+          <div className="bg-red-50 border border-red-200 rounded-lg p-6 flex items-center gap-4 text-red-800">
+            <AlertCircle size={24} />
+            <div>
+              <h3 className="font-semibold">Error loading products</h3>
+              <p>{error}</p>
+            </div>
+          </div>
+        )}
+        {!loading && !error && filteredProducts.length === 0 && (
+          <div className="text-center py-20 text-gray-500">
+            <p className="text-xl">No products found</p>
+          </div>
+        )}
         {!loading && !error && filteredProducts.length > 0 && (
           <>
             <div className="mb-6 text-gray-600">
@@ -87,7 +108,7 @@ function App() {
                   key={product.id}
                   product={product}
                   onSelect={() => setSelectedProduct(product)}
-                onAddToCart={() => addToCart(product)}
+                  onAddToCart={() => addToCart(product)}
                 />
               ))}
             </div>
