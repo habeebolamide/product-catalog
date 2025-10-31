@@ -1,73 +1,72 @@
-# React + TypeScript + Vite
+Product Catalog Viewer
+A modern, responsive e-commerce product catalog application built with React, TypeScript, and Tailwind CSS. Features real-time search, filtering, and persistent cart functionality.
+🚀 Quick Start
+bash# Install dependencies
+npm install
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Run development server
+npm run dev
 
-Currently, two official plugins are available:
+# Build for production
+npm run build
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Preview production build
+npm run preview
+The application will be available at http://localhost:5173
+🛠️ Tech Stack
 
-## React Compiler
+React 18 - UI library
+TypeScript - Type safety and better developer experience
+Vite - Fast build tool and development server
+Zustand - Lightweight state management with persistence
+Tailwind CSS - Utility-first styling framework
+Lucide React - Modern icon library
+Fake Store API - Public product data source
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+✨ Features
 
-## Expanding the ESLint configuration
+Product Browsing - Responsive grid layout with product cards
+Search & Filter - Real-time search with category filtering
+Product Details - Modal view with full product information and reviews
+Shopping Cart - Add/remove items with quantity management
+Persistent Storage - Cart state persists across browser sessions
+Responsive Design - Optimized for mobile, tablet, and desktop
+Loading States - Clear feedback for async operations
+Error Handling - Graceful error messages for failed requests
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+📂 Project Structure
+src/
+├── components/          # Reusable UI components
+│   ├── CartSidebar.tsx
+│   ├── FilterBar.tsx
+│   ├── Header.tsx
+│   ├── ProductCard.tsx
+│   └── ProductDetailModal.tsx
+├── hooks/              # Custom React hooks
+│   └── useFilteredProducts.ts
+├── store/              # Zustand state management
+│   └── useStore.ts
+├── types/              # TypeScript type definitions
+│   └── index.ts
+├── App.tsx             # Main application component
+└── main.tsx            # Application entry point
+🎨 Architecture Decisions
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Zustand with Persistence - Chosen for its simplicity and built-in localStorage middleware, avoiding boilerplate while maintaining type safety
+Component Composition - Small, focused components for better reusability and testing
+Custom Hooks - Extracted filtering logic for cleaner components and easier testing
+TypeScript - Strict typing throughout for fewer runtime errors
+Modular File Structure - Clear separation of concerns for maintainability
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+🔧 Configuration
+The project uses sensible defaults but can be customized:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Tailwind - Edit tailwind.config.js for theme customization
+Vite - Modify vite.config.ts for build configuration
+TypeScript - Adjust tsconfig.json for stricter or looser type checking
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+📝 Notes
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Cart data persists in localStorage under the key cart-storage
+The application uses Fake Store API which returns 20 products across 4 categories
+All monetary values are formatted to 2 decimal places
