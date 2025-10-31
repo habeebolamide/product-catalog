@@ -5,6 +5,7 @@ import { useFilteredProducts } from './hooks/useFilteredProducts';
 import { ProductCard } from './components/ProductCard';
 import { CartSidebar } from './components/CartSidebar';
 import { AlertCircle, Loader2 } from 'lucide-react';
+import { ProductDetailModal } from './components/ProductDetailModal';
 
 function App() {
   const {
@@ -13,12 +14,13 @@ function App() {
     cart,
     searchQuery,
     setSearchQuery,
-    setSelectedProduct,
     loading,
     error,
     addToCart,
     removeFromCart,
-    updateQuantity
+    updateQuantity,
+    selectedProduct,
+    setSelectedProduct
   } = useStore();
   const [cartOpen, setCartOpen] = useState(false);
   const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -52,10 +54,10 @@ function App() {
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-30 w-full">
         <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-indigo-600">ShopHub</h1>
+          {/* <h1 className="text-2xl font-bold text-indigo-600">ShopHub</h1> */}
           <button
             onClick={() => setCartOpen(!cartOpen)}
-            className="relative bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-2"
+            className="relative bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-2 ml-auto"
           >
             <span className="font-medium">Cart</span>
             {cartItemCount > 0 && (
@@ -117,6 +119,13 @@ function App() {
       </div>
 
 
+      {selectedProduct && (
+        <ProductDetailModal
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+          onAddToCart={() => addToCart(selectedProduct)}
+        />
+      )}
 
       {/* Cart Modal */}
       <CartSidebar
