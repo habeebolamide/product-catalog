@@ -47,9 +47,9 @@ The application will be available at `http://localhost:5173`
 src/
 ├── components/          # Reusable UI components
 │   ├── CartSidebar.tsx
-│   ├── SearchBar.tsx
 │   ├── ProductCard.tsx
-│   └── ProductDetailModal.tsx
+│   ├── ProductDetailModal.tsx
+│   └── SearchBar.tsx
 ├── hooks/              # Custom React hooks
 │   └── useFilteredProducts.ts
 ├── state/              # Zustand state management
